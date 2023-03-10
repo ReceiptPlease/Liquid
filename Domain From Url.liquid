@@ -1,0 +1,29 @@
+
+{%- liquid
+
+    #
+    #   Doesn't work for urls with long second suffix
+    #   -> subpage.page.longSecondSuffix.suffix
+    #
+
+    assign url = 'https://github.com/ReceiptPlease/Liquid?var=34123'
+    
+    assign sections = url | downcase | split : '://'
+
+    assign parts = sections[1] | split : '/'
+
+    assign host = parts[0] | split : '.' | reverse
+
+    assign domain = host[1]
+
+    assign length = domain | size
+
+    if length < 4
+        assign domain = host[2]
+    endif
+    
+    #
+    #   Returns 'github'
+    #
+    
+-%}
